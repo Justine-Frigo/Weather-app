@@ -23,7 +23,7 @@ body {
     .container {
       text-align: center;
 
-      button {
+      .search-button {
         padding: 8px 12px;
         font-family: "Poppins", sans-serif;
         font-size: 16px;
@@ -54,6 +54,24 @@ body {
         font-family: "Poppins", sans-serif;
         font-size: 14px;
         margin-top: 15px;
+
+      }
+
+      .delete{
+        padding: 5px 8px;
+        font-family: "Poppins", sans-serif;
+        font-size: 14px;
+        margin-left: 10px;
+        cursor: pointer;
+        background-color: #F07167;
+        border: none;
+        border-radius: 10px;
+        transition: background-color ease-in-out 300ms;
+
+        &:hover{
+            background-color: #f07067be;
+            transition: background-color ease-in-out 300ms;
+        }
 
       }
     }

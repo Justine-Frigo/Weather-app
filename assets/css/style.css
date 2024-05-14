@@ -16,7 +16,7 @@ body main {
 body main .container {
   text-align: center;
 }
-body main .container button {
+body main .container .search-button {
   padding: 8px 12px;
   font-family: "Poppins", sans-serif;
   font-size: 16px;
@@ -27,7 +27,7 @@ body main .container button {
   border-radius: 10px;
   transition: background-color ease-in-out 300ms;
 }
-body main .container button:hover {
+body main .container .search-button:hover {
   background-color: rgba(141, 128, 176, 0.7607843137);
   transition: background-color ease-in-out 300ms;
 }
@@ -43,6 +43,21 @@ body main .container select {
   font-family: "Poppins", sans-serif;
   font-size: 14px;
   margin-top: 15px;
+}
+body main .container .delete {
+  padding: 5px 8px;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  margin-left: 10px;
+  cursor: pointer;
+  background-color: #F07167;
+  border: none;
+  border-radius: 10px;
+  transition: background-color ease-in-out 300ms;
+}
+body main .container .delete:hover {
+  background-color: rgba(240, 112, 103, 0.7450980392);
+  transition: background-color ease-in-out 300ms;
 }
 body main .weather-info {
   display: flex;

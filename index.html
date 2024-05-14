@@ -14,12 +14,12 @@
         <h1>Weather App</h1>
         <div class="search">
             <input type="text" id="city" placeholder="Enter city name" onkeypress="checkEnter(event)">
-            <button onclick="getWeather()">Search</button>
+            <button class="search-button" onclick="getWeather()">Search</button>
         </div>
         <select id="city-list">
             <option value="null" selected>Search history</option>
         </select>
-        <button onclick="handleDeleteSubmit()">Delete history</button>
+        <button class="delete" onclick="handleDeleteSubmit()">Delete history</button>
 
         <div class="weather-info" id="weather-info">
             <!-- DOM here-->
