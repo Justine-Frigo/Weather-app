@@ -72,6 +72,22 @@ function saveCity(city) {
   }
 }
 
+function getWeatherImage(description) {
+  description = description.toLowerCase();
+  if (description.includes("clear")) {
+    return "./assets/images/sun.svg";
+  } else if (description.includes("rain")) {
+    return "./assets/images/rain.svg";
+  } else if (description.includes("storm") || description.includes("thunderstorm")) {
+    return "./assets/images/storm.svg";
+  } else if (description.includes("snow")) {
+    return "./assets/images/snow.svg";
+  } else {
+    return "./assets/images/cloud-sun.svg"; // default image for cloudy or other conditions
+  }
+}
+
+
 function displayWeather(data) {
   const weatherInfo = document.getElementById("weather-info");
   weatherInfo.innerHTML = "";
@@ -107,14 +123,16 @@ function displayWeather(data) {
 
       const formattedDate = formatDateToFrench(date);
 
+      const weatherImage = getWeatherImage (description);
+
       const dayDiv = document.createElement("div");
       dayDiv.className = "day-forecast";
       dayDiv.innerHTML = `
             <h3>${formattedDate}</h3>
-            <p>Temperature: ${averageTemp.toFixed(1)}°C</p>
-            <p>Weather: ${description}</p>
-            <p>Humidity: ${humidity}%</p>
-            <p>Wind Speed: ${windSpeed} m/s</p>
+            <p><img src="${weatherImage}" alt="${description}"></p>
+            <p><img src="./assets/images/temperature.svg" alt="Temperature"> ${averageTemp.toFixed(1)}°C</p>
+           <p><img src="./assets/images/humidity.svg" alt="Humidity"> ${humidity}%</p>
+           <p><img src="./assets/images/wind.svg" alt="Wind Speed"> ${windSpeed} m/s</p>
         `;
       weatherInfo.appendChild(dayDiv);
     });
