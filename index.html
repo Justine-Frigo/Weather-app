@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather App</title>
     <link rel="stylesheet" href="./assets/css/style.css">
-    <script src="./assets/js/script.js" defer></script>
+    <script type="module" src="./assets/js/script.js" defer></script>
 </head>
 <body>
     <header></header>
@@ -16,7 +16,10 @@
             <input type="text" id="city" placeholder="Enter city name" onkeypress="checkEnter(event)">
             <button onclick="getWeather()">Search</button>
         </div>
-        <select id="city-list"></select>
+        <select id="city-list">
+            <option value="null" selected>Search history</option>
+        </select>
+        <button onclick="handleDeleteSubmit()">Delete history</button>
 
         <div class="weather-info" id="weather-info">
             <!-- DOM here-->

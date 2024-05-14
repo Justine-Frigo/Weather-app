@@ -1,4 +1,10 @@
-const apiKey = "34eadb2f44a685109460eae812b38e47"; //Clé API générée
+import {deleteHistory, handleDeleteSubmit } from './deleteHistory.js';
+import { apiKey } from './config.js';
+
+window.deleteHistory = deleteHistory;
+window.handleDeleteSubmit = handleDeleteSubmit;
+window.getWeather = getWeather;
+window.checkEnter = checkEnter;
 
 document.addEventListener("DOMContentLoaded", () => {
   const savedCities = JSON.parse(localStorage.getItem("cities")) || [];
@@ -19,7 +25,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   cityList.addEventListener("change", (event) => {
     const selectedCity = event.target.value;
-    getWeather(selectedCity);
+    if (event.target.value != 'null') {
+      getWeather(selectedCity);
+    }
+   
   });
 });
 
@@ -73,13 +82,17 @@ function saveCity(city) {
 }
 
 // Icônes
+// Utilisation de plusieurs if/else car le switch en javascript ne permet pas l'utilisation d'expressions conditionnelles (includes())
 function getWeatherImage(description) {
   description = description.toLowerCase();
   if (description.includes("clear")) {
     return "./assets/images/sun.svg";
   } else if (description.includes("rain")) {
     return "./assets/images/rain.svg";
-  } else if (description.includes("storm") || description.includes("thunderstorm")) {
+  } else if (
+    description.includes("storm") ||
+    description.includes("thunderstorm")
+  ) {
     return "./assets/images/storm.svg";
   } else if (description.includes("snow")) {
     return "./assets/images/snow.svg";
@@ -88,6 +101,23 @@ function getWeatherImage(description) {
   }
 }
 
+function getWeatherImageClass(description) {
+  description = description.toLowerCase();
+  if (description.includes("clear")) {
+    return "sun";
+  } else if (description.includes("rain")) {
+    return "rain";
+  } else if (
+    description.includes("storm") ||
+    description.includes("thunderstorm")
+  ) {
+    return "storm";
+  } else if (description.includes("snow")) {
+    return "snow";
+  } else {
+    return "default";
+  }
+}
 
 function displayWeather(data) {
   const weatherInfo = document.getElementById("weather-info");
@@ -110,6 +140,10 @@ function displayWeather(data) {
   cityHeader.textContent = cityName;
   weatherInfo.appendChild(cityHeader);
 
+  const cardsContainer = document.createElement("article");
+  cardsContainer.className = "cards-container";
+  weatherInfo.appendChild(cardsContainer);
+
   // Afficher le temps pour les 5 prochains jours
   Object.keys(dailyForecasts)
     .slice(0, 5)
@@ -124,23 +158,28 @@ function displayWeather(data) {
 
       const formattedDate = formatDateToFrench(date);
 
-      const weatherImage = getWeatherImage (description);
+      const weatherImage = getWeatherImage(description);
+
+      const weatherImageClass = getWeatherImageClass(description);
 
       const dayDiv = document.createElement("div");
       dayDiv.className = "day-forecast";
       dayDiv.innerHTML = `
             <h3>${formattedDate}</h3>
-            <p><img src="${weatherImage}" alt="${description}"></p>
-            <p><img src="./assets/images/temperature.svg" alt="Temperature"> ${averageTemp.toFixed(1)}°C</p>
-           <p><img src="./assets/images/humidity.svg" alt="Humidity"> ${humidity}%</p>
-           <p><img src="./assets/images/wind.svg" alt="Wind Speed"> ${windSpeed} m/s</p>
+            <p><img class="${weatherImageClass}" src="${weatherImage}" alt="${description}"></p>
+            <p class="temperature">${averageTemp.toFixed(1)}°C</p>
+            <section class="infos">
+              <p class="humidity"><img class="droplet" src="./assets/images/humidity.svg" alt="Humidity"> ${humidity}%</p>
+              <p class="wind-speed"><img class="wind" src="./assets/images/wind.svg" alt="Wind Speed"> ${windSpeed} m/s</p>
+           </section>
         `;
-      weatherInfo.appendChild(dayDiv);
+      cardsContainer.appendChild(dayDiv);
     });
 }
 
 // Formatage de dates
 function formatDateToFrench(date) {
-  const options = { year: "numeric", month: "long", day: "numeric" };
-  return new Date(date).toLocaleDateString("fr-FR", options);
+  const options = { year: "numeric", month: "short", day: "numeric" };
+  return new Date(date).toLocaleDateString("en-GB", options);
 }
+
