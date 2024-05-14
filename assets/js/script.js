@@ -5,16 +5,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const cityList = document.getElementById('city-list');
 
     savedCities.forEach(city => {
-        const cityItem = document.createElement('li');
-        cityItem.textContent = city;
-        cityItem.onclick = () => getWeather(city);
-        cityList.appendChild(cityItem);
+        const option = document.createElement('option');
+        option.textContent = city;
+        cityList.appendChild(option);
     });
 
     if (savedCities.length > 0) {
         document.getElementById('city').value = savedCities[savedCities.length - 1];
         getWeather(savedCities[savedCities.length - 1]);
     }
+
+    cityList.addEventListener('change', (event) => {
+        const selectedCity = event.target.value;
+        getWeather(selectedCity);
+    });
 });
 
 function checkEnter(event) {
@@ -54,10 +58,14 @@ function saveCity(city) {
         localStorage.setItem('cities', JSON.stringify(savedCities));
 
         const cityList = document.getElementById('city-list');
-        const cityItem = document.createElement('li');
-        cityItem.textContent = city;
-        cityItem.onclick = () => getWeather(city);
-        cityList.appendChild(cityItem);
+        
+        // Ajouter une nouvelle option à la fin du select
+        const option = document.createElement('option');
+        option.textContent = city;
+        cityList.appendChild(option);
+
+        // Sélectionner la nouvelle option ajoutée
+        option.selected = true;
     }
 }
 
