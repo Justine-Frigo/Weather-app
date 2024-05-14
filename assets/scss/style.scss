@@ -1,6 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
-
 body {
   font-family: "Poppins", sans-serif;
   color: #1e293b;
@@ -29,14 +28,14 @@ body {
         font-size: 16px;
         margin-left: 10px;
         cursor: pointer;
-        background-color: #8D80B0;
+        background-color: #8d80b0;
         border: none;
         border-radius: 10px;
         transition: background-color ease-in-out 300ms;
 
-        &:hover{
-            background-color: #8d80b0c2;
-            transition: background-color ease-in-out 300ms;
+        &:hover {
+          background-color: #8d80b0c2;
+          transition: background-color ease-in-out 300ms;
         }
       }
 
@@ -45,34 +44,73 @@ body {
         font-weight: 600;
       }
 
-      h2 {
-        font-size: 30px;
-        font-weight: 500;
-      }
 
-      select{
+      select {
         font-family: "Poppins", sans-serif;
         font-size: 14px;
         margin-top: 15px;
-
       }
 
-      .delete{
+      .delete {
         padding: 5px 8px;
         font-family: "Poppins", sans-serif;
         font-size: 14px;
         margin-left: 10px;
         cursor: pointer;
-        background-color: #F07167;
+        background-color: #f07167;
         border: none;
         border-radius: 10px;
         transition: background-color ease-in-out 300ms;
 
-        &:hover{
-            background-color: #f07067be;
-            transition: background-color ease-in-out 300ms;
+        &:hover {
+          background-color: #f07067be;
+          transition: background-color ease-in-out 300ms;
+        }
+      }
+    }
+
+    .app-header {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      h2 {
+        font-size: 30px;
+        font-weight: 500;
+        margin-top: -15px;
+      }
+
+      .img-container {
+        height: 230px;
+        position: relative;
+        margin-top: 3%;
+
+        .city-img {
+          width: 200px;
+          height: 200px;
+          border-radius: 100%;
+          border: 3px solid #8d80b0;
+         }
+
+
+        &::after {
+          content: " ";
+          border: 2px solid #8d80b0;
+          display: block;
+          box-sizing: border-box;
+          height: 220px;
+          width: 220px;
+          border-radius: 200px;
+          position: absolute;
+          top: -8px;
+          left: -7px;
+          clip-path: circle(190px at right center);
+        }
         }
 
+
+        
       }
     }
     .weather-info {
@@ -100,15 +138,18 @@ body {
           justify-content: space-between;
 
           .droplet {
-            filter: brightness(0) saturate(100%) invert(51%) sepia(96%) saturate(1098%) hue-rotate(182deg) brightness(87%) contrast(86%);
+            filter: brightness(0) saturate(100%) invert(51%) sepia(96%)
+              saturate(1098%) hue-rotate(182deg) brightness(87%) contrast(86%);
           }
 
           .wind {
-            filter: brightness(0) saturate(100%) invert(73%) sepia(7%) saturate(272%) hue-rotate(202deg) brightness(87%) contrast(93%);
+            filter: brightness(0) saturate(100%) invert(73%) sepia(7%)
+              saturate(272%) hue-rotate(202deg) brightness(87%) contrast(93%);
           }
         }
 
-        .humidity, .wind-speed {
+        .humidity,
+        .wind-speed {
           display: flex;
           flex-direction: row;
           align-items: center;
@@ -120,41 +161,44 @@ body {
           }
         }
 
-        
-
         h3 {
           font-size: 20px;
           font-weight: 500;
         }
 
-        .temperature{
+        .temperature {
           font-size: 20px;
           font-weight: 500;
         }
 
         .sun {
-          filter: brightness(0) saturate(100%) invert(93%) sepia(35%) saturate(493%) hue-rotate(345deg) brightness(105%) contrast(102%); 
+          filter: brightness(0) saturate(100%) invert(93%) sepia(35%)
+            saturate(493%) hue-rotate(345deg) brightness(105%) contrast(102%);
         }
 
         .rain {
-          filter: brightness(0) saturate(100%) invert(49%) sepia(55%) saturate(6450%) hue-rotate(167deg) brightness(97%) contrast(101%);
+          filter: brightness(0) saturate(100%) invert(49%) sepia(55%)
+            saturate(6450%) hue-rotate(167deg) brightness(97%) contrast(101%);
         }
 
         .storm {
-          filter: brightness(0) saturate(100%) invert(32%) sepia(6%) saturate(1690%) hue-rotate(177deg) brightness(98%) contrast(96%);
+          filter: brightness(0) saturate(100%) invert(32%) sepia(6%)
+            saturate(1690%) hue-rotate(177deg) brightness(98%) contrast(96%);
         }
 
         .snow {
-          filter: brightness(0) saturate(100%) invert(100%) sepia(8%) saturate(350%) hue-rotate(48deg) brightness(97%) contrast(93%);
+          filter: brightness(0) saturate(100%) invert(100%) sepia(8%)
+            saturate(350%) hue-rotate(48deg) brightness(97%) contrast(93%);
         }
 
         .default {
-          filter: brightness(0) saturate(100%) invert(78%) sepia(76%) saturate(334%) hue-rotate(344deg) brightness(102%) contrast(101%);
+          filter: brightness(0) saturate(100%) invert(78%) sepia(76%)
+            saturate(334%) hue-rotate(344deg) brightness(102%) contrast(101%);
         }
       }
     }
   }
-}
+
 
 @media screen and (min-width: 768px) {
   .cards-container {
@@ -164,8 +208,8 @@ body {
   }
 
   .day-forecast {
-    flex: 1 1 10%; 
-    min-width: 200px; 
+    flex: 1 1 10%;
+    min-width: 200px;
   }
 
   h2 {
@@ -174,7 +218,3 @@ body {
     align-items: center;
   }
 }
-  
-
-
-  

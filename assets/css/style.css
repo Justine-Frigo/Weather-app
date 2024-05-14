@@ -22,7 +22,7 @@ body main .container .search-button {
   font-size: 16px;
   margin-left: 10px;
   cursor: pointer;
-  background-color: #8D80B0;
+  background-color: #8d80b0;
   border: none;
   border-radius: 10px;
   transition: background-color ease-in-out 300ms;
@@ -35,10 +35,6 @@ body main .container h1 {
   font-size: 40px;
   font-weight: 600;
 }
-body main .container h2 {
-  font-size: 30px;
-  font-weight: 500;
-}
 body main .container select {
   font-family: "Poppins", sans-serif;
   font-size: 14px;
@@ -50,7 +46,7 @@ body main .container .delete {
   font-size: 14px;
   margin-left: 10px;
   cursor: pointer;
-  background-color: #F07167;
+  background-color: #f07167;
   border: none;
   border-radius: 10px;
   transition: background-color ease-in-out 300ms;
@@ -59,12 +55,48 @@ body main .container .delete:hover {
   background-color: rgba(240, 112, 103, 0.7450980392);
   transition: background-color ease-in-out 300ms;
 }
-body main .weather-info {
+body main .app-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+body main .app-header h2 {
+  font-size: 30px;
+  font-weight: 500;
+  margin-top: -15px;
+}
+body main .app-header .img-container {
+  height: 230px;
+  position: relative;
+  margin-top: 3%;
+}
+body main .app-header .img-container .city-img {
+  width: 200px;
+  height: 200px;
+  border-radius: 100%;
+  border: 3px solid #8d80b0;
+}
+body main .app-header .img-container::after {
+  content: " ";
+  border: 2px solid #8d80b0;
+  display: block;
+  box-sizing: border-box;
+  height: 220px;
+  width: 220px;
+  border-radius: 200px;
+  position: absolute;
+  top: -8px;
+  left: -7px;
+  -webkit-clip-path: circle(190px at right center);
+          clip-path: circle(190px at right center);
+}
+body .weather-info {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-body main .weather-info .day-forecast {
+body .weather-info .day-forecast {
   background: #cceaeb;
   margin: 10px;
   padding: 10px;
@@ -74,51 +106,53 @@ body main .weather-info .day-forecast {
   flex-direction: column;
   justify-content: space-around;
 }
-body main .weather-info .day-forecast img {
+body .weather-info .day-forecast img {
   width: 3rem;
 }
-body main .weather-info .day-forecast .infos {
+body .weather-info .day-forecast .infos {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
-body main .weather-info .day-forecast .infos .droplet {
+body .weather-info .day-forecast .infos .droplet {
   filter: brightness(0) saturate(100%) invert(51%) sepia(96%) saturate(1098%) hue-rotate(182deg) brightness(87%) contrast(86%);
 }
-body main .weather-info .day-forecast .infos .wind {
+body .weather-info .day-forecast .infos .wind {
   filter: brightness(0) saturate(100%) invert(73%) sepia(7%) saturate(272%) hue-rotate(202deg) brightness(87%) contrast(93%);
 }
-body main .weather-info .day-forecast .humidity, body main .weather-info .day-forecast .wind-speed {
+body .weather-info .day-forecast .humidity,
+body .weather-info .day-forecast .wind-speed {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
   gap: 10px;
 }
-body main .weather-info .day-forecast .humidity img, body main .weather-info .day-forecast .wind-speed img {
+body .weather-info .day-forecast .humidity img,
+body .weather-info .day-forecast .wind-speed img {
   width: 1.2rem;
 }
-body main .weather-info .day-forecast h3 {
+body .weather-info .day-forecast h3 {
   font-size: 20px;
   font-weight: 500;
 }
-body main .weather-info .day-forecast .temperature {
+body .weather-info .day-forecast .temperature {
   font-size: 20px;
   font-weight: 500;
 }
-body main .weather-info .day-forecast .sun {
+body .weather-info .day-forecast .sun {
   filter: brightness(0) saturate(100%) invert(93%) sepia(35%) saturate(493%) hue-rotate(345deg) brightness(105%) contrast(102%);
 }
-body main .weather-info .day-forecast .rain {
+body .weather-info .day-forecast .rain {
   filter: brightness(0) saturate(100%) invert(49%) sepia(55%) saturate(6450%) hue-rotate(167deg) brightness(97%) contrast(101%);
 }
-body main .weather-info .day-forecast .storm {
+body .weather-info .day-forecast .storm {
   filter: brightness(0) saturate(100%) invert(32%) sepia(6%) saturate(1690%) hue-rotate(177deg) brightness(98%) contrast(96%);
 }
-body main .weather-info .day-forecast .snow {
+body .weather-info .day-forecast .snow {
   filter: brightness(0) saturate(100%) invert(100%) sepia(8%) saturate(350%) hue-rotate(48deg) brightness(97%) contrast(93%);
 }
-body main .weather-info .day-forecast .default {
+body .weather-info .day-forecast .default {
   filter: brightness(0) saturate(100%) invert(78%) sepia(76%) saturate(334%) hue-rotate(344deg) brightness(102%) contrast(101%);
 }
 

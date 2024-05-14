@@ -1,5 +1,5 @@
 import {deleteHistory, handleDeleteSubmit } from './deleteHistory.js';
-import { apiKey } from './config.js';
+import { apiKey, unsplashApiKey} from './config.js';
 
 window.deleteHistory = deleteHistory;
 window.handleDeleteSubmit = handleDeleteSubmit;
@@ -47,19 +47,27 @@ async function getWeather(cityName) {
   }
   // API
   const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
+  const unsplashUrl = `https://api.unsplash.com/search/photos/?client_id=${unsplashApiKey}&page=1&query=${city}`
 
   try {
     const response = await fetch(url);
     const data = await response.json();
 
+    const unsplashResponse = await fetch(unsplashUrl);
+    const unsplashData = await unsplashResponse.json();
+
+    console.log(unsplashData)
+
     if (data.cod === "200") {
       saveCity(city);
-      displayWeather(data);
+      displayWeather(data, unsplashData);
     } else {
       alert("City not found");
     }
+
   } catch (error) {
     alert("Error fetching data");
+    console.error(error)
   }
 }
 
@@ -119,11 +127,21 @@ function getWeatherImageClass(description) {
   }
 }
 
-function displayWeather(data) {
+function displayWeather(data, unsplashData) {
   const weatherInfo = document.getElementById("weather-info");
   weatherInfo.innerHTML = "";
 
   const cityName = data.city.name;
+
+  let cityImgUrl;
+
+  if(unsplashData.results.length > 0) {
+    cityImgUrl = unsplashData ? unsplashData.results[0].urls.small : '';
+  } else {
+    cityImgUrl = './assets/images/borabora.jpg';
+  }
+
+  console.log(cityImgUrl)
 
   // Regrouper les prévisions par date
   const dailyForecasts = {};
@@ -136,9 +154,20 @@ function displayWeather(data) {
   });
 
   //Créer un seul élément pour le nom de la ville
+  const cityContainer = document.createElement('article')
+  cityContainer.className = 'app-header';
+  const cityImg = document.createElement('img');
+  cityImg.src = cityImgUrl;
+  cityImg.className = 'city-img';
+  const imgContainer = document.createElement('div');
+  imgContainer.className = 'img-container';
+  imgContainer.appendChild(cityImg);
+  cityContainer.appendChild(imgContainer);
   const cityHeader = document.createElement("h2");
+  
   cityHeader.textContent = cityName;
-  weatherInfo.appendChild(cityHeader);
+  cityContainer.appendChild(cityHeader)
+  weatherInfo.appendChild(cityContainer);
 
   const cardsContainer = document.createElement("article");
   cardsContainer.className = "cards-container";
