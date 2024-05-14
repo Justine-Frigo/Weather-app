@@ -72,6 +72,7 @@ function saveCity(city) {
   }
 }
 
+// Icônes
 function getWeatherImage(description) {
   description = description.toLowerCase();
   if (description.includes("clear")) {
@@ -83,7 +84,7 @@ function getWeatherImage(description) {
   } else if (description.includes("snow")) {
     return "./assets/images/snow.svg";
   } else {
-    return "./assets/images/cloud-sun.svg"; // default image for cloudy or other conditions
+    return "./assets/images/cloud-sun.svg";
   }
 }
 

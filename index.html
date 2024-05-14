@@ -8,11 +8,13 @@
     <script src="./assets/js/script.js" defer></script>
 </head>
 <body>
+    <header></header>
+   <main>
     <div class="container">
         <h1>Weather App</h1>
         <div class="search">
             <input type="text" id="city" placeholder="Enter city name" onkeypress="checkEnter(event)">
-            <button onclick="getWeather()">SUBMIT</button>
+            <button onclick="getWeather()">Search</button>
         </div>
         <select id="city-list"></select>
 
@@ -20,6 +22,9 @@
             <!-- DOM here-->
         </div>
     </div>
+</main>
+<footer></footer>
+
 </body>
 </html>
 
