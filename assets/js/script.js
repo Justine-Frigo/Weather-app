@@ -32,6 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+// Permet d'appuyer sur Enter quand on cherche une ville
 function checkEnter(event) {
   if (event.key === "Enter") {
     getWeather();
@@ -109,6 +110,7 @@ function getWeatherImage(description) {
   }
 }
 
+// Ajoute une classe
 function getWeatherImageClass(description) {
   description = description.toLowerCase();
   if (description.includes("clear")) {
@@ -127,6 +129,7 @@ function getWeatherImageClass(description) {
   }
 }
 
+// Affiche la météo et les images des villes
 function displayWeather(data, unsplashData) {
   const weatherInfo = document.getElementById("weather-info");
   weatherInfo.innerHTML = "";
