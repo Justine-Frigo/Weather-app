@@ -6,8 +6,8 @@ body {
   font-family: $fontFamily;
   color: $slate;
   min-height: 100vh;
-  display: flex;
-  justify-content: center;
+  // display: flex;
+  // justify-content: center;
   background: rgb(148, 160, 190);
   background: linear-gradient(
     180deg,
@@ -16,6 +16,24 @@ body {
     rgba(251, 201, 203, 1) 100%
   );
   margin: 0;
+
+  header{
+
+    a{
+    text-decoration: none;
+
+    &:visited{
+      color: black;
+    }
+  
+    }
+
+    i{
+      margin-top: 20px;
+      margin-left: 20px;
+    }
+
+  }
 
   main {
     display: flex;

@@ -3,11 +3,19 @@ body {
   font-family: "Poppins", sans-serif;
   color: #1e293b;
   min-height: 100vh;
-  display: flex;
-  justify-content: center;
   background: rgb(148, 160, 190);
   background: linear-gradient(180deg, rgb(148, 160, 190) 0%, rgb(188, 214, 215) 50%, rgb(251, 201, 203) 100%);
   margin: 0;
+}
+body header a {
+  text-decoration: none;
+}
+body header a:visited {
+  color: black;
+}
+body header i {
+  margin-top: 20px;
+  margin-left: 20px;
 }
 body main {
   display: flex;
