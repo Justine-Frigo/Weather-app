@@ -1,5 +1,5 @@
-import { deleteHistory, handleDeleteSubmit } from './deleteHistory.js';
-import { apiKey, unsplashApiKey } from './config.js';
+import {deleteHistory, handleDeleteSubmit } from './deleteHistory.js';
+import { apiKey, unsplashApiKey} from './config.js';
 
 window.deleteHistory = deleteHistory;
 window.handleDeleteSubmit = handleDeleteSubmit;
@@ -17,20 +17,18 @@ document.addEventListener("DOMContentLoaded", () => {
     cityList.appendChild(option);
   });
 
-  // Sélectionne la dernière ville et affiche ses informations météorologiques
+  // sélectionne la dernière ville et affiche ses informations météorologiques
   if (savedCities.length > 0) {
     document.getElementById("city").value = savedCities[savedCities.length - 1];
     getWeather(savedCities[savedCities.length - 1]);
-  } else {
-    // Si aucune ville n'est sauvegardée, utiliser la géolocalisation
-    getCurrentPosition();
   }
 
   cityList.addEventListener("change", (event) => {
     const selectedCity = event.target.value;
-    if (selectedCity != 'null') {
+    if (event.target.value != 'null') {
       getWeather(selectedCity);
     }
+   
   });
 });
 
@@ -41,56 +39,6 @@ function checkEnter(event) {
   }
 }
 
-// Fonction pour obtenir la position actuelle de l'utilisateur
-function getCurrentPosition() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
-  } else {
-    alert("Geolocation is not supported by this browser.");
-  }
-}
-
-// Callback en cas de succès de la géolocalisation
-function successCallback(position) {
-  const latitude = position.coords.latitude;
-  const longitude = position.coords.longitude;
-  getWeatherByCoordinates(latitude, longitude);
-}
-
-// Callback en cas d'erreur de la géolocalisation
-function errorCallback(error) {
-  console.error(`Geolocation error: ${error.message}`);
-  alert("Unable to retrieve your location");
-}
-
-// Obtenir les informations météorologiques par coordonnées
-async function getWeatherByCoordinates(latitude, longitude) {
-  const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
-
-  try {
-    const response = await fetch(url);
-    const data = await response.json();
-
-    if (data.cod === "200") {
-      const city = data.city.name;
-      saveCity(city);
-
-      // Appel à Unsplash API pour obtenir l'image de la ville
-      const unsplashUrl = `https://api.unsplash.com/search/photos/?client_id=${unsplashApiKey}&page=1&query=${city}`;
-      const unsplashResponse = await fetch(unsplashUrl);
-      const unsplashData = await unsplashResponse.json();
-
-      displayWeather(data, unsplashData);
-    } else {
-      alert("City not found");
-    }
-
-  } catch (error) {
-    alert("Error fetching data");
-    console.error(error);
-  }
-}
-
 // Obtenir les informations météorologiques d'une ville
 async function getWeather(cityName) {
   const city = cityName || document.getElementById("city").value;
@@ -98,10 +46,9 @@ async function getWeather(cityName) {
     alert("Please enter a city name");
     return;
   }
-
-  // API URL pour obtenir la météo par nom de ville
+  // API
   const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
-  const unsplashUrl = `https://api.unsplash.com/search/photos/?client_id=${unsplashApiKey}&page=1&query=${city}`;
+  const unsplashUrl = `https://api.unsplash.com/search/photos/?client_id=${unsplashApiKey}&page=1&query=${city}`
 
   try {
     const response = await fetch(url);
@@ -110,7 +57,7 @@ async function getWeather(cityName) {
     const unsplashResponse = await fetch(unsplashUrl);
     const unsplashData = await unsplashResponse.json();
 
-    console.log(unsplashData);
+    console.log(unsplashData)
 
     if (data.cod === "200") {
       saveCity(city);
@@ -121,7 +68,7 @@ async function getWeather(cityName) {
 
   } catch (error) {
     alert("Error fetching data");
-    console.error(error);
+    console.error(error)
   }
 }
 
@@ -191,13 +138,13 @@ function displayWeather(data, unsplashData) {
 
   let cityImgUrl;
 
-  if (unsplashData.results.length > 0) {
+  if(unsplashData.results.length > 0) {
     cityImgUrl = unsplashData ? unsplashData.results[0].urls.small : '';
   } else {
     cityImgUrl = './assets/images/borabora.jpg';
   }
 
-  console.log(cityImgUrl);
+  console.log(cityImgUrl)
 
   // Regrouper les prévisions par date
   const dailyForecasts = {};
@@ -209,8 +156,8 @@ function displayWeather(data, unsplashData) {
     dailyForecasts[date].push(item);
   });
 
-  // Créer un seul élément pour le nom de la ville
-  const cityContainer = document.createElement('article');
+  //Créer un seul élément pour le nom de la ville
+  const cityContainer = document.createElement('article')
   cityContainer.className = 'app-header';
   const cityImg = document.createElement('img');
   cityImg.src = cityImgUrl;
@@ -220,9 +167,9 @@ function displayWeather(data, unsplashData) {
   imgContainer.appendChild(cityImg);
   cityContainer.appendChild(imgContainer);
   const cityHeader = document.createElement("h2");
-
+  
   cityHeader.textContent = cityName;
-  cityContainer.appendChild(cityHeader);
+  cityContainer.appendChild(cityHeader)
   weatherInfo.appendChild(cityContainer);
 
   const cardsContainer = document.createElement("article");
@@ -237,8 +184,8 @@ function displayWeather(data, unsplashData) {
 
       // Calcul des températures minimales et maximales pour chaque jour
       const temps = dailyData.map(item => item.main.temp);
-      const minTemp = Math.min(...temps);
-      const maxTemp = Math.max(...temps);
+      const minTemp = Math.min(...temps); 
+      const maxTemp = Math.max(...temps); 
 
       // const averageTemp =
       //   dailyData.reduce((sum, item) => sum + item.main.temp, 0) /
@@ -277,3 +224,4 @@ function formatDateToFrench(date) {
   const options = { year: "numeric", month: "short", day: "numeric" };
   return new Date(date).toLocaleDateString("en-GB", options);
 }
+
