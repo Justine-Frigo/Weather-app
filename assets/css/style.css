@@ -145,7 +145,13 @@ body .weather-info .day-forecast h3 {
   font-weight: 500;
 }
 body .weather-info .day-forecast .temperature {
-  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+body .weather-info .day-forecast .min-temperature, body .weather-info .day-forecast .max-temperature {
+  font-size: 18px;
   font-weight: 500;
 }
 body .weather-info .day-forecast .sun {

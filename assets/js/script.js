@@ -181,9 +181,16 @@ function displayWeather(data, unsplashData) {
     .slice(0, 5)
     .forEach((date) => {
       const dailyData = dailyForecasts[date];
-      const averageTemp =
-        dailyData.reduce((sum, item) => sum + item.main.temp, 0) /
-        dailyData.length;
+
+      // Calcul des températures minimales et maximales pour chaque jour
+      const temps = dailyData.map(item => item.main.temp);
+      const minTemp = Math.min(...temps); 
+      const maxTemp = Math.max(...temps); 
+
+      // const averageTemp =
+      //   dailyData.reduce((sum, item) => sum + item.main.temp, 0) /
+      //   dailyData.length;
+
       const description = dailyData[0].weather[0].description;
       const humidity = dailyData[0].main.humidity;
       const windSpeed = dailyData[0].wind.speed;
@@ -199,7 +206,10 @@ function displayWeather(data, unsplashData) {
       dayDiv.innerHTML = `
             <h3>${formattedDate}</h3>
             <p><img class="${weatherImageClass}" src="${weatherImage}" alt="${description}"></p>
-            <p class="temperature">${averageTemp.toFixed(1)}°C</p>
+            <div class="temperatures">
+            <p class="min-temperature">Min: ${minTemp.toFixed(1)}°C</p>
+            <p class="max-temperature">Max: ${maxTemp.toFixed(1)}°C</p>
+          </div>
             <section class="infos">
               <p class="humidity"><img class="droplet" src="./assets/images/humidity.svg" alt="Humidity"> ${humidity}%</p>
               <p class="wind-speed"><img class="wind" src="./assets/images/wind.svg" alt="Wind Speed"> ${windSpeed} m/s</p>

@@ -186,9 +186,17 @@ body {
         }
 
         .temperature {
-          font-size: 20px;
-          font-weight: 500;
+          display: flex;
+          flex-direction: column;
+          align-items: center;  
+          gap: 5px;
+
         }
+
+          .min-temperature, .max-temperature{
+            font-size: 18px;
+            font-weight: 500;
+          }
 
         // Couleurs des svg
         .sun {
