@@ -17,6 +17,12 @@ body header i {
   margin-top: 20px;
   margin-left: 20px;
 }
+body header #github-icon {
+  transition: transform 0.3s ease-in-out;
+}
+body header #github-icon:hover {
+  animation: fa-beat 1s infinite;
+}
 body main {
   display: flex;
   justify-content: center;

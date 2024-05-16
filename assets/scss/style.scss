@@ -6,8 +6,6 @@ body {
   font-family: $fontFamily;
   color: $slate;
   min-height: 100vh;
-  // display: flex;
-  // justify-content: center;
   background: rgb(148, 160, 190);
   background: linear-gradient(
     180deg,
@@ -32,6 +30,15 @@ body {
       margin-top: 20px;
       margin-left: 20px;
     }
+
+    #github-icon {
+      transition: transform 0.3s ease-in-out;
+    }
+
+    #github-icon:hover {
+      animation: fa-beat 1s infinite;
+    }
+
 
   }
 
