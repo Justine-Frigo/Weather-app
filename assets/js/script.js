@@ -195,7 +195,7 @@ function displayWeather(data, unsplashData) {
       const humidity = dailyData[0].main.humidity;
       const windSpeed = dailyData[0].wind.speed;
 
-      const formattedDate = formatDateToFrench(date);
+      const formattedDate = formatDateToEnglish(date);
 
       const weatherImage = getWeatherImage(description);
 
@@ -220,7 +220,7 @@ function displayWeather(data, unsplashData) {
 }
 
 // Formatage de dates
-function formatDateToFrench(date) {
+function formatDateToEnglish(date) {
   const options = { year: "numeric", month: "short", day: "numeric" };
   return new Date(date).toLocaleDateString("en-GB", options);
 }
