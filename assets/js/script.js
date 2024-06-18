@@ -6,23 +6,25 @@ window.handleDeleteSubmit = handleDeleteSubmit;
 window.getWeather = getWeather;
 window.checkEnter = checkEnter;
 
+// On récupère la clé cities du local storage sinon on la définit en tant que tableau vide si elle n'existe pas
 document.addEventListener("DOMContentLoaded", () => {
   const savedCities = JSON.parse(localStorage.getItem("cities")) || [];
   const cityList = document.getElementById("city-list");
 
-  // Pour chaque ville sauvegardée, crée une option dans la liste déroulante
+  // Pour chaque ville sauvegardée, créer une option dans la liste déroulante
   savedCities.forEach((city) => {
     const option = document.createElement("option");
     option.textContent = city;
     cityList.appendChild(option);
   });
 
-  // sélectionne la dernière ville et affiche ses informations météorologiques
+  // Sélectionner la dernière ville et afficher ses informations météorologiques
   if (savedCities.length > 0) {
     document.getElementById("city").value = savedCities[savedCities.length - 1];
     getWeather(savedCities[savedCities.length - 1]);
   }
 
+  // Dès qu'on change la valeur du select, on fait appel à l'api
   cityList.addEventListener("change", (event) => {
     const selectedCity = event.target.value;
     if (event.target.value != 'null') {
@@ -51,13 +53,15 @@ async function getWeather(cityName) {
   const unsplashUrl = `https://api.unsplash.com/search/photos/?client_id=${unsplashApiKey}&page=1&query=${city}`
 
   try {
+
+    // On récupère les données de l'api météo
     const response = await fetch(url);
     const data = await response.json();
 
+    // On récupère les données de l'api d'unsplash
     const unsplashResponse = await fetch(unsplashUrl);
     const unsplashData = await unsplashResponse.json();
 
-    console.log(unsplashData)
 
     if (data.cod === "200") {
       saveCity(city);
@@ -72,6 +76,7 @@ async function getWeather(cityName) {
   }
 }
 
+// Sauvegarder les villes dans le local storage
 function saveCity(city) {
   let savedCities = JSON.parse(localStorage.getItem("cities")) || [];
   if (!savedCities.includes(city)) {
@@ -91,7 +96,7 @@ function saveCity(city) {
 }
 
 // Icônes
-// Utilisation de plusieurs if/else car le switch en javascript ne permet pas l'utilisation d'expressions conditionnelles (includes())
+// On ne peut pas utiliser de switch car on a besoin des else
 function getWeatherImage(description) {
   description = description.toLowerCase();
   if (description.includes("clear")) {
@@ -110,7 +115,7 @@ function getWeatherImage(description) {
   }
 }
 
-// Ajoute une classe
+// Ajoute une classe aux icônes
 function getWeatherImageClass(description) {
   description = description.toLowerCase();
   if (description.includes("clear")) {
@@ -144,7 +149,6 @@ function displayWeather(data, unsplashData) {
     cityImgUrl = './assets/images/borabora.jpg';
   }
 
-  console.log(cityImgUrl)
 
   // Regrouper les prévisions par date
   const dailyForecasts = {};
@@ -156,7 +160,7 @@ function displayWeather(data, unsplashData) {
     dailyForecasts[date].push(item);
   });
 
-  //Créer un seul élément pour le nom de la ville
+  // Créer un seul élément pour le nom de la ville
   const cityContainer = document.createElement('article')
   cityContainer.className = 'app-header';
   const cityImg = document.createElement('img');
@@ -186,10 +190,6 @@ function displayWeather(data, unsplashData) {
       const temps = dailyData.map(item => item.main.temp);
       const minTemp = Math.min(...temps); 
       const maxTemp = Math.max(...temps); 
-
-      // const averageTemp =
-      //   dailyData.reduce((sum, item) => sum + item.main.temp, 0) /
-      //   dailyData.length;
 
       const description = dailyData[0].weather[0].description;
       const humidity = dailyData[0].main.humidity;
